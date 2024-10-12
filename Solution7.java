@@ -51,13 +51,14 @@ public class Solution7 {
 
     public String smallestStringWithSwaps(String s, List<List<Integer>> pairs) {
 
-        if (pairs.size() <= 1) {
+        int len = s.length();
+        if (pairs.size() == 0 || len <= 1) {
             return s;
         }
 
         // 第 1 步：将任意交换的结点对输入并查集
         int len = s.length();
-        UnionFind unionFind = new UnionFind(len-1);
+        UnionFind unionFind = new UnionFind(len);
         for (List<Integer> pair : pairs) {
             int index1 = pair.get(0);
             int index2 = pair.get(1);
@@ -77,7 +78,6 @@ public class Solution7 {
         for (int i = 0; i < len; i++) {
             int root = unionFind.find(i);
             stringBuilder.append(hashMap.get(root).poll());
-            stringBuilder.append(" ");
         }
         return stringBuilder.toString();
     }
